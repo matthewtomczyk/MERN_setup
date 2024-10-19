@@ -1,6 +1,6 @@
 # MERN Setup Script
 
-This is a shell script to automatically set up a new MERN (MongoDB, Express, React, Node.js) project on macOS. The script installs the required dependencies and creates the folder structure for both the frontend (React) and backend (Express).
+This is a shell script to automatically set up a new MERN (MongoDB, Express, React, Node.js) project on macOS. The script installs the required dependencies and creates the folder structure for both the frontend (React) and backend (Express). It populates the data with default values, consistent with the command npm init -y. 
 
 ## Features
 
@@ -28,7 +28,7 @@ This is a shell script to automatically set up a new MERN (MongoDB, Express, Rea
 
 You can either clone this repository or download the script directly:
 
-git clone <repository_url>
+git clone https://github.com/matthewtomczyk/MERN_setup
 
 Or download the script file manually.
 
