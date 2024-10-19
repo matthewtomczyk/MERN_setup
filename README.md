@@ -86,6 +86,12 @@ MyMERNApp/
 
 - If Homebrew or other dependencies are already installed, the script will skip the installation steps for those components.
 
+## Image 
+
+Screenshop of browser after running the npm start command in the frontend
+
+![npm start image](https://github.com/matthewtomczyk/MERN_setup/blob/main/Image.png)
+
 ## Troubleshooting
 
 - Ensure that you have the necessary permissions to install Homebrew and system-wide npm packages.
