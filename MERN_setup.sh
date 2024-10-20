@@ -31,6 +31,22 @@ fi
 echo "Updating Homebrew..."
 brew update
 
+# 2.5 Check for NVM installation
+if [ -z "$NVM_DIR" ] || ! command_exists nvm ; then
+    echo "NVM not found. Installing NVM..."
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+
+    # Load NVM into the current shell session
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+    echo "NVM installed successfully."
+else
+    echo "NVM is already installed."
+fi
+
+
 # 3. Install Node.js and npm (via Homebrew)
 if ! command_exists node || ! command_exists npm ; then
     echo "Installing Node.js and npm..."
