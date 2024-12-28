@@ -31,7 +31,7 @@ fi
 echo "Updating Homebrew..."
 brew update
 
-# 2.5 Check for NVM installation
+# 3. Check for NVM installation
 if [ -z "$NVM_DIR" ] || ! command_exists nvm ; then
     echo "NVM not found. Installing NVM..."
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
@@ -46,20 +46,20 @@ else
     echo "NVM is already installed."
 fi
 
-
-# 3. Install Node.js and npm (via Homebrew)
+# 4. Install Node.js via NVM
 if ! command_exists node || ! command_exists npm ; then
-    echo "Installing Node.js and npm..."
-    brew install node
+    echo "Installing Node.js via NVM..."
+    nvm install --lts
+    nvm use --lts
 else
     echo "Node.js and npm are already installed."
 fi
 
-# 4. Verify Node.js and npm installation
+# 5. Verify Node.js and npm installation
 echo "Node version: $(node -v)"
 echo "npm version: $(npm -v)"
 
-# 5. Install MongoDB (Community Edition) using Homebrew
+# 6. Install MongoDB (Community Edition) using Homebrew
 if ! command_exists mongod ; then
     echo "Installing MongoDB..."
     brew tap mongodb/brew
@@ -68,39 +68,46 @@ else
     echo "MongoDB is already installed."
 fi
 
-# 6. Start MongoDB as a service
+# 7. Start MongoDB as a service
 echo "Starting MongoDB..."
 brew services start mongodb/brew/mongodb-community@6.0
 
-# 7. Install global npm packages for MERN development
+# 8. Install global npm packages for MERN development
 echo "Installing global npm packages for MERN stack development..."
-npm install -g express-generator create-react-app nodemon
+npm install -g express-generator nodemon
 
-# 8. Create a new directory for the MERN project
+# 9. Create a new directory for the MERN project
 echo "Creating a new MERN project directory at $PROJECT_DIR..."
 mkdir -p "$PROJECT_DIR"
 cd "$PROJECT_DIR"
 
-# 9. Set up Express backend
+# 10. Initialize Git repository
+echo "Initializing a Git repository..."
+git init
+echo "# $PROJECT_NAME" > README.md
+git add .
+git commit -m "Initial commit for $PROJECT_NAME MERN stack project"
+
+# 11. Set up Express backend
 echo "Setting up Express backend in $PROJECT_NAME/backend..."
 express --no-view backend
 cd backend
 npm install
 cd ..
 
-# 10. Set up React frontend
-echo "Setting up React frontend in $PROJECT_NAME/frontend..."
-npx create-react-app frontend
+# 12. Set up Vite React frontend
+echo "Setting up Vite React frontend in $PROJECT_NAME/frontend..."
+npm create vite@latest frontend -- --template react
 cd frontend
 npm install
 cd ..
 
-# 11. Starting MongoDB in the background
+# 13. Starting MongoDB in the background
 echo "MongoDB service is running in the background."
 
-# 12. Run the backend server
+# 14. Run instructions
 echo "To run the backend, go to $PROJECT_DIR/backend and use: 'npm start' or 'nodemon'."
-echo "To run the frontend, go to $PROJECT_DIR/frontend and use: 'npm start'."
+echo "To run the frontend, go to $PROJECT_DIR/frontend and use: 'npm run dev'."
 
-# 13. Success message
+# 15. Success message
 echo "MERN stack setup for $PROJECT_NAME is complete! Happy coding!"
